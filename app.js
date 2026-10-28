@@ -12,6 +12,11 @@ document.querySelectorAll('[data-x-link]').forEach((link) => {
   if (config.xUrl) link.href = config.xUrl;
 });
 
+document.querySelectorAll('[data-launchpad-link]').forEach((link) => {
+  link.textContent = `${config.launchpadName || 'Boxa'} ↗`;
+  if (config.launchpadUrl) link.href = config.launchpadUrl;
+});
+
 document.querySelectorAll('[data-buy-link]').forEach((link) => {
   if (config.buyUrl) {
     link.href = config.buyUrl;

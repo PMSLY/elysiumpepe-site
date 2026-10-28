@@ -4,5 +4,7 @@ window.ELYSIUM_PEPE = {
   chain: 'Elysium',
   contractAddress: '',
   buyUrl: '',
+  launchpadName: 'Boxa',
+  launchpadUrl: 'https://boxa.pro/',
   xUrl: 'https://x.com/ElysiumPepeCoin'
 };
