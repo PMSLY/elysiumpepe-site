@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Bridge HYPE between HyperEVM and Elysium through the official Elysium gateway." />
+    <meta property="og:title" content="Elysium Pepe Bridge — Cross the Gate" />
+    <meta property="og:description" content="The frog crossed first. Your HYPE is next." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://elysiumpepe.xyz/bridge/" />
+    <meta property="og:image" content="https://elysiumpepe.xyz/assets/elysium-pepe-banner.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#030a11" />
+    <title>Elysium Pepe Bridge — Cross the Gate</title>
+    <link rel="canonical" href="https://elysiumpepe.xyz/bridge/" />
+    <link rel="icon" href="../assets/elysium-pepe-avatar.webp" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Syncopate:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="bridge.css?v=20261029-1" />
+    <script src="bridge.js?v=20261029-1" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#bridge-main">Skip to bridge</a>
+    <div class="bridge-grain" aria-hidden="true"></div>
+    <div class="orbit-field" aria-hidden="true"><i></i><i></i><i></i></div>
+
+    <header class="bridge-header">
+      <a class="bridge-brand" href="/" aria-label="Elysium Pepe home">
+        <img src="../assets/elysium-pepe-avatar.webp" alt="" />
+        <span>ELYSIUM <b>PEPE</b></span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="/">Home</a>
+        <a class="is-active" href="/bridge/" aria-current="page">Bridge</a>
+      </nav>
+      <button class="wallet-button" type="button" data-connect>Connect wallet</button>
+    </header>
+
+    <main id="bridge-main" class="bridge-layout">
+      <section class="bridge-story" aria-labelledby="bridge-title">
+        <p class="bridge-kicker"><span></span> THE GATE / MAINNET</p>
+        <h1 id="bridge-title">BRING HYPE<br />THROUGH<br /><em>THE GATE.</em></h1>
+        <p class="bridge-lead">The frog crossed first. Your HYPE is next.</p>
+        <button class="guide-button" type="button" data-guide-open>
+          <span class="play-icon" aria-hidden="true">▶</span>
+          <span><strong>How to cross</strong><small>60-second guide</small></span>
+        </button>
+
+        <div class="route-card" aria-label="Bridge route from HyperEVM to Elysium">
+          <div class="route-node">
+            <img src="../assets/hyperevm.png" alt="HyperEVM" />
+            <strong>HyperEVM</strong>
+          </div>
+          <div class="route-line" aria-hidden="true">
+            <span class="route-frog"><img src="../assets/elysium-pepe-avatar.webp" alt="" /></span>
+          </div>
+          <div class="route-node route-node-destination">
+            <img src="../assets/elysium-chain.png" alt="Elysium" />
+            <strong>Elysium</strong>
+          </div>
+          <span class="route-label" data-route-label>DEPOSIT →</span>
+        </div>
+
+        <div class="bridge-facts">
+          <div><span>BRIDGE FEE</span><strong>0%</strong></div>
+          <div><span>DEPOSIT</span><strong class="mint">Minutes</strong></div>
+          <div><span>WITHDRAW</span><strong class="gold">5–6 days</strong></div>
+        </div>
+      </section>
+
+      <section class="bridge-console" aria-label="HYPE bridge">
+        <div class="console-topline">
+          <div>
+            <span>OFFICIAL GATE</span>
+            <strong>Bridge HYPE</strong>
+          </div>
+          <span class="gate-live"><i></i> LIVE</span>
+        </div>
+
+        <div class="direction-tabs" role="group" aria-label="Bridge direction">
+          <button type="button" class="is-active" data-direction="deposit" aria-pressed="true">Deposit</button>
+          <button type="button" data-direction="withdraw" aria-pressed="false">Withdraw</button>
+        </div>
+
+        <div class="amount-card source-card">
+          <div class="amount-label">
+            <label for="bridge-amount">You send</label>
+            <span class="chain-chip" data-source-chain><img src="../assets/hyperevm.png" alt="" /> HyperEVM</span>
+          </div>
+          <div class="amount-row">
+            <input id="bridge-amount" type="text" inputmode="decimal" autocomplete="off" placeholder="0.0" aria-describedby="source-balance" />
+            <span class="token-chip">HYPE</span>
+          </div>
+          <div class="quick-row" role="group" aria-label="Quick amounts">
+            <button type="button" data-amount="0.1">0.1</button>
+            <button type="button" data-amount="0.5">0.5</button>
+            <button type="button" data-amount="1">1</button>
+            <button type="button" data-amount="5">5</button>
+            <button type="button" data-amount="10">10</button>
+          </div>
+          <span id="source-balance" class="balance" data-source-balance>Connect to view balance</span>
+        </div>
+
+        <button class="switch-button" type="button" data-switch aria-label="Switch bridge direction">⇅</button>
+
+        <div class="amount-card receive-card">
+          <div class="amount-label">
+            <span>You receive</span>
+            <span class="chain-chip chain-chip-elysium" data-destination-chain><img src="../assets/elysium-chain.png" alt="" /> Elysium</span>
+          </div>
+          <div class="amount-row">
+            <output data-receive>0.0</output>
+            <span class="token-chip">HYPE</span>
+          </div>
+          <span class="arrival mint" data-arrival>Arrives in minutes</span>
+          <span class="balance" data-destination-balance>Connect to view balance</span>
+        </div>
+
+        <dl class="route-summary">
+          <div><dt>You receive</dt><dd><span data-summary-amount>0</span> HYPE on <span data-summary-chain>Elysium</span></dd></div>
+          <div><dt data-timing-label>Arrival</dt><dd data-timing>In minutes</dd></div>
+        </dl>
+
+        <div class="transaction-state" role="status" aria-live="polite" data-phase hidden></div>
+        <button class="primary-action" type="button" data-primary>Connect wallet</button>
+        <p class="withdraw-note" data-withdraw-note hidden>Withdrawals take two steps: start here, then claim on HyperEVM after the waiting period.</p>
+      </section>
+
+      <section class="activity-panel" aria-label="Bridge activity">
+        <div class="activity-head">
+          <div><span>LOCAL ACTIVITY</span><h2>Recent deposits</h2></div>
+          <button type="button" data-refresh>Refresh</button>
+        </div>
+        <p class="activity-copy">Deposits made in this browser appear here with their HyperEVM confirmation status.</p>
+        <ul class="deposit-list" data-deposit-list></ul>
+        <form class="track-form" data-track-form>
+          <label for="track-hash">Track a deposit</label>
+          <div><input id="track-hash" type="text" placeholder="HyperEVM tx hash 0x…" autocomplete="off" spellcheck="false" /><button type="submit" data-track disabled>Track</button></div>
+          <p role="alert" data-track-error hidden></p>
+        </form>
+        <div class="claim-card">
+          <div><span>WITHDRAWAL CLAIMS</span><strong>Ready after ~5–6 days</strong></div>
+          <a href="https://elysiumcat.com/bridge/" target="_blank" rel="noreferrer">Open official claim flow ↗</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bridge-footer">
+      <span>OFFICIAL ELYSIUM PEPE GATE</span>
+      <p>Always verify the domain and transaction details before signing.</p>
+      <a href="https://hyperevmscan.io/address/0xce59f8B65ad41C9DAE4c07A0571a39824bD92cff" target="_blank" rel="noreferrer">Bridge contract ↗</a>
+    </footer>
+
+    <dialog class="guide-modal" data-guide-modal aria-labelledby="guide-title">
+      <div class="guide-card">
+        <button class="modal-close" type="button" data-guide-close aria-label="Close guide">×</button>
+        <p>FIELD MANUAL / 001</p>
+        <h2 id="guide-title">How to cross the gate</h2>
+        <ol>
+          <li><span>01</span><div><strong>Connect your wallet</strong><p>Use the address that should receive HYPE on the destination chain.</p></div></li>
+          <li><span>02</span><div><strong>Choose a direction</strong><p>Deposit from HyperEVM or start a withdrawal from Elysium.</p></div></li>
+          <li><span>03</span><div><strong>Enter HYPE and review</strong><p>The bridge fee is 0%; network gas still applies.</p></div></li>
+          <li><span>04</span><div><strong>Confirm in your wallet</strong><p>Deposits arrive in minutes. Withdrawals require a claim after about 5–6 days.</p></div></li>
+        </ol>
+        <button class="guide-done" type="button" data-guide-close>Got it — open the gate</button>
+      </div>
+    </dialog>
+
+    <div class="bridge-toast" role="status" aria-live="polite" data-toast></div>
+  </body>
+</html>
