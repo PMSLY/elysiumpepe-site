@@ -333,7 +333,8 @@ h2 {
 }
 
 .site-footer p { margin: 0; }
-.site-footer > a:last-child { font-weight: 900; text-decoration: none; color: var(--gold-bright); }
+.footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+.footer-links a { font-weight: 900; text-decoration: none; color: var(--gold-bright); }
 
 @media (max-width: 920px) {
   nav > a:not(.button):not(.nav-social) { display: none; }

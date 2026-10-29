@@ -12,6 +12,10 @@ document.querySelectorAll('[data-x-link]').forEach((link) => {
   if (config.xUrl) link.href = config.xUrl;
 });
 
+document.querySelectorAll('[data-telegram-link]').forEach((link) => {
+  if (config.telegramUrl) link.href = config.telegramUrl;
+});
+
 document.querySelectorAll('[data-launchpad-link]').forEach((link) => {
   link.textContent = `${config.launchpadName || 'Boxa'} ↗`;
   if (config.launchpadUrl) link.href = config.launchpadUrl;
