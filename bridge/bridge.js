@@ -44,16 +44,14 @@ const dom = {
   primary: document.querySelector('[data-primary]'),
   phase: document.querySelector('[data-phase]'),
   routeLabel: document.querySelector('[data-route-label]'),
-  routeNodes: [...document.querySelectorAll('.route-node')],
+  routeCard: document.querySelector('.route-card'),
+  routeMotion: document.querySelector('[data-route-motion]'),
   depositList: document.querySelector('[data-deposit-list]'),
   trackForm: document.querySelector('[data-track-form]'),
   trackInput: document.querySelector('#track-hash'),
   trackButton: document.querySelector('[data-track]'),
   trackError: document.querySelector('[data-track-error]'),
   refresh: document.querySelector('[data-refresh]'),
-  guideModal: document.querySelector('[data-guide-modal]'),
-  guideOpen: document.querySelector('[data-guide-open]'),
-  guideClose: [...document.querySelectorAll('[data-guide-close]')],
   toast: document.querySelector('[data-toast]'),
 };
 
@@ -171,14 +169,6 @@ function setPhase(message, tone = 'info', link = null) {
   }
 }
 
-function updateRouteNode(node, chainKey) {
-  const chain = CHAINS[chainKey];
-  const image = node.querySelector('img');
-  image.src = chain.icon;
-  image.alt = chain.name;
-  node.querySelector('strong').textContent = chain.name;
-}
-
 function updateUI() {
   const source = sourceKey();
   const destination = destinationKey();
@@ -210,9 +200,14 @@ function updateUI() {
   dom.summaryAmount.textContent = amount === '' ? '0' : amount;
   dom.withdrawNote.hidden = state.direction !== 'withdraw';
   dom.routeLabel.textContent = state.direction === 'deposit' ? 'DEPOSIT →' : '← WITHDRAW';
-  updateRouteNode(dom.routeNodes[0], source);
-  updateRouteNode(dom.routeNodes[1], destination);
-
+  dom.routeCard.classList.toggle('is-withdraw', state.direction === 'withdraw');
+  if (dom.routeCard.dataset.direction !== state.direction) {
+    dom.routeCard.dataset.direction = state.direction;
+    dom.routeMotion.setAttribute('path', state.direction === 'deposit'
+      ? 'M12 86 C 138 -12, 342 -12, 468 86'
+      : 'M468 86 C 342 -12, 138 -12, 12 86');
+    if (typeof dom.routeMotion.beginElement === 'function') dom.routeMotion.beginElement();
+  }
   const sourceBalance = state.balances[source];
   const destinationBalance = state.balances[destination];
   dom.sourceBalance.textContent = state.account ? `Balance ${formatHype(sourceBalance)} HYPE` : 'Connect to view balance';
@@ -506,17 +501,6 @@ dom.depositList.addEventListener('click', (event) => {
   saveDeposits();
   renderDeposits();
 });
-
-dom.guideOpen.addEventListener('click', () => {
-  dom.guideModal.showModal();
-  document.body.classList.add('modal-open');
-});
-
-dom.guideClose.forEach((button) => button.addEventListener('click', () => dom.guideModal.close()));
-dom.guideModal.addEventListener('click', (event) => {
-  if (event.target === dom.guideModal) dom.guideModal.close();
-});
-dom.guideModal.addEventListener('close', () => document.body.classList.remove('modal-open'));
 
 if (provider()?.on) {
   provider().on('accountsChanged', async (accounts) => {

@@ -17,8 +17,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Syncopate:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="bridge.css?v=20261029-1" />
-    <script src="bridge.js?v=20261029-1" defer></script>
+    <link rel="stylesheet" href="bridge.css?v=20261029-2" />
+    <script src="bridge.js?v=20261029-2" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#bridge-main">Skip to bridge</a>
@@ -42,10 +42,6 @@
         <p class="bridge-kicker"><span></span> THE GATE / MAINNET</p>
         <h1 id="bridge-title">BRING HYPE<br />THROUGH<br /><em>THE GATE.</em></h1>
         <p class="bridge-lead">The frog crossed first. Your HYPE is next.</p>
-        <button class="guide-button" type="button" data-guide-open>
-          <span class="play-icon" aria-hidden="true">▶</span>
-          <span><strong>How to cross</strong><small>60-second guide</small></span>
-        </button>
 
         <div class="route-card" aria-label="Bridge route from HyperEVM to Elysium">
           <div class="route-node">
@@ -53,7 +49,28 @@
             <strong>HyperEVM</strong>
           </div>
           <div class="route-line" aria-hidden="true">
-            <span class="route-frog"><img src="../assets/elysium-pepe-avatar.webp" alt="" /></span>
+            <svg viewBox="0 0 480 120" role="presentation">
+              <defs>
+                <linearGradient id="routeGradient" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#7cf0b3" />
+                  <stop offset="100%" stop-color="#f4c86a" />
+                </linearGradient>
+                <radialGradient id="travelerGlow">
+                  <stop offset="0%" stop-color="#fff" />
+                  <stop offset="45%" stop-color="#ffe19a" />
+                  <stop offset="100%" stop-color="#f4c86a" stop-opacity="0" />
+                </radialGradient>
+                <clipPath id="frogTravelerClip"><circle r="13" /></clipPath>
+              </defs>
+              <path class="route-track" d="M12 86 C 138 -12, 342 -12, 468 86" />
+              <path class="route-dashes" d="M12 86 C 138 -12, 342 -12, 468 86" />
+              <g class="route-traveler">
+                <circle r="22" fill="url(#travelerGlow)" />
+                <circle r="15" fill="#f4c86a" />
+                <image href="../assets/elysium-pepe-avatar.webp" x="-13" y="-13" width="26" height="26" clip-path="url(#frogTravelerClip)" preserveAspectRatio="xMidYMid slice" />
+                <animateMotion data-route-motion dur="2.15s" repeatCount="indefinite" path="M12 86 C 138 -12, 342 -12, 468 86" />
+              </g>
+            </svg>
           </div>
           <div class="route-node route-node-destination">
             <img src="../assets/elysium-chain.png" alt="Elysium" />
@@ -151,21 +168,6 @@
       <p>Always verify the domain and transaction details before signing.</p>
       <a href="https://hyperevmscan.io/address/0xce59f8B65ad41C9DAE4c07A0571a39824bD92cff" target="_blank" rel="noreferrer">Bridge contract ↗</a>
     </footer>
-
-    <dialog class="guide-modal" data-guide-modal aria-labelledby="guide-title">
-      <div class="guide-card">
-        <button class="modal-close" type="button" data-guide-close aria-label="Close guide">×</button>
-        <p>FIELD MANUAL / 001</p>
-        <h2 id="guide-title">How to cross the gate</h2>
-        <ol>
-          <li><span>01</span><div><strong>Connect your wallet</strong><p>Use the address that should receive HYPE on the destination chain.</p></div></li>
-          <li><span>02</span><div><strong>Choose a direction</strong><p>Deposit from HyperEVM or start a withdrawal from Elysium.</p></div></li>
-          <li><span>03</span><div><strong>Enter HYPE and review</strong><p>The bridge fee is 0%; network gas still applies.</p></div></li>
-          <li><span>04</span><div><strong>Confirm in your wallet</strong><p>Deposits arrive in minutes. Withdrawals require a claim after about 5–6 days.</p></div></li>
-        </ol>
-        <button class="guide-done" type="button" data-guide-close>Got it — open the gate</button>
-      </div>
-    </dialog>
 
     <div class="bridge-toast" role="status" aria-live="polite" data-toast></div>
   </body>
