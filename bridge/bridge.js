@@ -23,6 +23,19 @@ const DEPOSIT_ETH_SELECTOR = '0x439370b1';
 const WITHDRAW_ETH_SELECTOR = '0x25e16063';
 const STORAGE_KEY = 'epepe:bridge:deposits';
 const HASH_PATTERN = /^0x[a-fA-F0-9]{64}$/;
+const announcedWallets = [];
+let selectedWallet = null;
+let boundProvider = null;
+let walletSelectionResolve = null;
+let walletSelectionPromise = null;
+
+window.addEventListener('eip6963:announceProvider', (event) => {
+  const detail = event?.detail;
+  if (!detail?.provider || typeof detail.provider.request !== 'function') return;
+  const duplicate = announcedWallets.some((wallet) => wallet.provider === detail.provider || (detail.info?.uuid && wallet.info?.uuid === detail.info.uuid));
+  if (!duplicate) announcedWallets.push(detail);
+});
+window.dispatchEvent(new Event('eip6963:requestProvider'));
 
 const dom = {
   connectButtons: [...document.querySelectorAll('[data-connect]')],
@@ -52,6 +65,9 @@ const dom = {
   trackButton: document.querySelector('[data-track]'),
   trackError: document.querySelector('[data-track-error]'),
   refresh: document.querySelector('[data-refresh]'),
+  walletModal: document.querySelector('[data-wallet-modal]'),
+  walletOptions: document.querySelector('[data-wallet-options]'),
+  walletClose: document.querySelector('[data-wallet-close]'),
   toast: document.querySelector('[data-toast]'),
 };
 
@@ -133,8 +149,119 @@ async function rpc(chainKey, method, params = []) {
   return payload.result;
 }
 
+function legacyWalletName(wallet, index) {
+  if (wallet?.isRabby) return 'Rabby Wallet';
+  if (wallet?.isCoinbaseWallet) return 'Coinbase Wallet';
+  if (wallet?.isBraveWallet) return 'Brave Wallet';
+  if (wallet?.isMetaMask) return 'MetaMask';
+  return index ? `Browser wallet ${index + 1}` : 'Browser wallet';
+}
+
+function availableWallets() {
+  const wallets = [...announcedWallets];
+  let injected = [];
+  try {
+    if (Array.isArray(window.ethereum?.providers)) injected = window.ethereum.providers;
+    else if (window.ethereum) injected = [window.ethereum];
+  } catch {
+    injected = [];
+  }
+  injected.forEach((wallet, index) => {
+    const name = legacyWalletName(wallet, index);
+    const duplicate = wallets.some((item) => item.provider === wallet || item.info?.name?.toLowerCase() === name.toLowerCase());
+    if (!wallet || typeof wallet.request !== 'function' || duplicate) return;
+    wallets.push({
+      info: { uuid: `legacy-${index}`, name, rdns: 'legacy.injected' },
+      provider: wallet,
+    });
+  });
+  return wallets;
+}
+
 function provider() {
-  return window.ethereum || null;
+  if (selectedWallet?.provider) return selectedWallet.provider;
+  const wallets = availableWallets();
+  return wallets.length === 1 ? wallets[0].provider : null;
+}
+
+const providerEvents = {
+  accountsChanged: async (accounts) => {
+    state.account = accounts?.[0] || null;
+    setPhase(state.account ? `Connected ${short(state.account)}.` : 'Wallet disconnected.', state.account ? 'success' : 'info');
+    await refreshBalances();
+  },
+  chainChanged: () => refreshBalances(),
+  disconnect: () => {
+    state.account = null;
+    refreshBalances();
+    setPhase('Wallet disconnected.', 'info');
+  },
+};
+
+function bindProviderEvents(wallet) {
+  if (boundProvider === wallet) return;
+  if (boundProvider?.removeListener) {
+    Object.entries(providerEvents).forEach(([event, handler]) => boundProvider.removeListener(event, handler));
+  }
+  boundProvider = wallet;
+  if (boundProvider?.on) {
+    Object.entries(providerEvents).forEach(([event, handler]) => boundProvider.on(event, handler));
+  }
+}
+
+function activateWallet(wallet) {
+  selectedWallet = wallet;
+  bindProviderEvents(wallet.provider);
+  return wallet.provider;
+}
+
+function closeWalletPicker(result = null) {
+  if (dom.walletModal.open) dom.walletModal.close();
+  const resolve = walletSelectionResolve;
+  walletSelectionResolve = null;
+  walletSelectionPromise = null;
+  if (resolve) resolve(result);
+}
+
+function chooseWallet() {
+  if (walletSelectionPromise) return walletSelectionPromise;
+  const wallets = availableWallets();
+  if (!wallets.length) return Promise.resolve(null);
+  if (wallets.length === 1) return Promise.resolve(activateWallet(wallets[0]));
+
+  dom.walletOptions.replaceChildren();
+  wallets.forEach((wallet) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'wallet-option';
+
+    const icon = wallet.info?.icon;
+    if (typeof icon === 'string' && icon.startsWith('data:')) {
+      const image = document.createElement('img');
+      image.src = icon;
+      image.alt = '';
+      button.append(image);
+    } else {
+      const fallback = document.createElement('b');
+      fallback.className = 'wallet-fallback';
+      fallback.textContent = '◇';
+      button.append(fallback);
+    }
+
+    const copy = document.createElement('span');
+    const name = document.createElement('strong');
+    const note = document.createElement('small');
+    name.textContent = wallet.info?.name || 'EVM wallet';
+    note.textContent = 'Connect this wallet';
+    copy.append(name, note);
+    button.append(copy);
+    button.addEventListener('click', () => closeWalletPicker(activateWallet(wallet)));
+    dom.walletOptions.append(button);
+  });
+
+  dom.walletModal.showModal();
+  walletSelectionPromise = new Promise((resolve) => { walletSelectionResolve = resolve; });
+  return walletSelectionPromise;
 }
 
 function errorMessage(error) {
@@ -199,8 +326,11 @@ function updateUI() {
   dom.receive.textContent = amount === '' ? '0.0' : amount;
   dom.summaryAmount.textContent = amount === '' ? '0' : amount;
   dom.withdrawNote.hidden = state.direction !== 'withdraw';
-  dom.routeLabel.textContent = state.direction === 'deposit' ? 'DEPOSIT →' : '← WITHDRAW';
+  dom.routeLabel.textContent = state.direction === 'deposit' ? 'HYPER → ELYSIUM' : 'HYPER ← ELYSIUM';
   dom.routeCard.classList.toggle('is-withdraw', state.direction === 'withdraw');
+  dom.routeCard.setAttribute('aria-label', state.direction === 'deposit'
+    ? 'Bridge route from HyperEVM to Elysium'
+    : 'Withdrawal route from Elysium to HyperEVM');
   if (dom.routeCard.dataset.direction !== state.direction) {
     dom.routeCard.dataset.direction = state.direction;
     dom.routeMotion.setAttribute('path', state.direction === 'deposit'
@@ -242,9 +372,15 @@ function setBusy(value, stage = null) {
 }
 
 async function connectWallet() {
-  const wallet = provider();
+  let wallet = provider();
+  if (wallet && !selectedWallet) {
+    const match = availableWallets().find((item) => item.provider === wallet);
+    if (match) wallet = activateWallet(match);
+  }
+  if (!wallet) wallet = await chooseWallet();
   if (!wallet) {
-    setPhase('No injected EVM wallet found. Install or open a compatible wallet, then try again.', 'error');
+    const walletsExist = availableWallets().length > 0;
+    setPhase(walletsExist ? 'Wallet connection cancelled.' : 'No injected EVM wallet found. Install or open a compatible wallet, then try again.', walletsExist ? 'info' : 'error');
     return false;
   }
   try {
@@ -502,20 +638,24 @@ dom.depositList.addEventListener('click', (event) => {
   renderDeposits();
 });
 
-if (provider()?.on) {
-  provider().on('accountsChanged', async (accounts) => {
-    state.account = accounts?.[0] || null;
-    setPhase(state.account ? `Connected ${short(state.account)}.` : 'Wallet disconnected.', state.account ? 'success' : 'info');
-    await refreshBalances();
-  });
-  provider().on('chainChanged', () => refreshBalances());
-}
+dom.walletClose.addEventListener('click', () => closeWalletPicker());
+dom.walletModal.addEventListener('cancel', (event) => {
+  event.preventDefault();
+  closeWalletPicker();
+});
+dom.walletModal.addEventListener('click', (event) => {
+  if (event.target === dom.walletModal) closeWalletPicker();
+});
 
 async function initialize() {
   renderDeposits();
   updateUI();
+  await new Promise((resolve) => setTimeout(resolve, 80));
   try {
-    const accounts = provider() ? await provider().request({ method: 'eth_accounts' }) : [];
+    const wallets = availableWallets();
+    if (wallets.length === 1) activateWallet(wallets[0]);
+    const wallet = provider();
+    const accounts = wallet ? await wallet.request({ method: 'eth_accounts' }) : [];
     state.account = accounts?.[0] || null;
     if (state.account) await refreshBalances();
   } catch {

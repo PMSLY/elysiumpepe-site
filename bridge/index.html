@@ -16,9 +16,9 @@
     <link rel="icon" href="../assets/elysium-pepe-avatar.webp" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Syncopate:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="bridge.css?v=20261029-2" />
-    <script src="bridge.js?v=20261029-2" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;family=Syncopate:wght@400;700&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="bridge.css?v=20261029-4" />
+    <script src="bridge.js?v=20261029-4" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#bridge-main">Skip to bridge</a>
@@ -76,7 +76,7 @@
             <img src="../assets/elysium-chain.png" alt="Elysium" />
             <strong>Elysium</strong>
           </div>
-          <span class="route-label" data-route-label>DEPOSIT →</span>
+          <span class="route-label" data-route-label>HYPER → ELYSIUM</span>
         </div>
 
         <div class="bridge-facts">
@@ -86,6 +86,7 @@
         </div>
       </section>
 
+      <div class="bridge-rail">
       <section class="bridge-console" aria-label="HYPE bridge">
         <div class="console-topline">
           <div>
@@ -161,6 +162,7 @@
           <a href="https://elysiumcat.com/bridge/" target="_blank" rel="noreferrer">Open official claim flow ↗</a>
         </div>
       </section>
+      </div>
     </main>
 
     <footer class="bridge-footer">
@@ -168,6 +170,16 @@
       <p>Always verify the domain and transaction details before signing.</p>
       <a href="https://hyperevmscan.io/address/0xce59f8B65ad41C9DAE4c07A0571a39824bD92cff" target="_blank" rel="noreferrer">Bridge contract ↗</a>
     </footer>
+
+    <dialog class="wallet-modal" data-wallet-modal aria-labelledby="wallet-title">
+      <div class="wallet-card">
+        <button class="wallet-close" type="button" data-wallet-close aria-label="Close wallet selection">×</button>
+        <p>WALLET ACCESS</p>
+        <h2 id="wallet-title">Choose your wallet</h2>
+        <div class="wallet-options" data-wallet-options></div>
+        <small>Only your public address is requested. You will review every transaction in your wallet.</small>
+      </div>
+    </dialog>
 
     <div class="bridge-toast" role="status" aria-live="polite" data-toast></div>
   </body>
