@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Elysium Pepe has entered the new chain. Follow the frog into Elysium."
+      content="Elysium Pepe has entered the new chain. Follow the divine frog beyond the gates of Elysium."
     />
-    <meta property="og:title" content="Elysium Pepe" />
+    <meta property="og:title" content="Elysium Pepe — The Divine Frog" />
     <meta property="og:description" content="The frog has entered Elysium." />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Elysium Pepe" />
@@ -16,162 +16,239 @@
     <meta property="og:image:width" content="1500" />
     <meta property="og:image:height" content="500" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Elysium Pepe" />
+    <meta name="twitter:title" content="Elysium Pepe — The Divine Frog" />
     <meta name="twitter:description" content="The frog has entered Elysium." />
     <meta name="twitter:image" content="https://elysiumpepe.xyz/assets/elysium-pepe-banner.webp" />
-    <meta name="theme-color" content="#071b2b" />
+    <meta name="theme-color" content="#030a11" />
     <title>Elysium Pepe — The frog has entered Elysium</title>
     <link rel="canonical" href="https://elysiumpepe.xyz/" />
     <link rel="icon" href="assets/elysium-pepe-avatar.webp" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Syncopate:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
     <script src="config.js"></script>
     <script src="app.js" defer></script>
   </head>
   <body>
-    <div class="sky" aria-hidden="true">
-      <span class="star star-a"></span>
-      <span class="star star-b"></span>
-      <span class="star star-c"></span>
-    </div>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
+    <div class="page-grain" aria-hidden="true"></div>
+    <div class="pointer-glow" aria-hidden="true"></div>
 
-    <header class="site-header">
+    <header class="site-header" data-header>
       <a class="brand" href="#top" aria-label="Elysium Pepe, back to top">
-        <img src="assets/elysium-pepe-avatar.webp" alt="" />
-        <span>ELYSIUM PEPE</span>
+        <span class="brand-mark"><img src="assets/elysium-pepe-avatar.webp" alt="" /></span>
+        <span class="brand-name">ELYSIUM <b>PEPE</b></span>
       </a>
+
       <nav aria-label="Main navigation">
-        <a href="#story">Story</a>
-        <a href="#gallery">Gallery</a>
-        <a class="nav-social" data-x-link href="https://x.com/ElysiumPepeCoin" target="_blank" rel="noreferrer">X</a>
-        <a class="nav-social" data-telegram-link href="https://t.me/ElysiumPepeOfficial" target="_blank" rel="noreferrer">Telegram</a>
-        <a class="button button-small buy-link" data-buy-link href="#token">Buy</a>
+        <a href="#lore">Lore</a>
+        <a href="#visions">Visions</a>
+        <a href="#token">Token</a>
       </nav>
+
+      <a class="nav-cta buy-link" data-buy-link href="#token">
+        <span class="pulse" aria-hidden="true"></span>
+        Buy <span data-ticker>$EPEPE</span>
+      </a>
     </header>
 
-    <main id="top">
-      <section class="hero section-shell">
-        <div class="hero-copy">
-          <p class="eyebrow">AN ANCIENT FROG. A BRAND-NEW CHAIN.</p>
-          <h1>ELYSIUM<br /><span>PEPE</span></h1>
-          <p class="hero-line">The frog has entered Elysium.</p>
-          <p class="hero-subline">One small leap for a frog. One divine mess for the gods.</p>
-          <div class="hero-actions">
-            <a class="button button-primary buy-link" data-buy-link href="#token">Buy <span data-ticker>$EPEPE</span></a>
-            <a class="button button-ghost" href="#story">Meet the frog ↓</a>
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-media" aria-hidden="true">
+          <img src="assets/elysium-pepe-first-post.webp" alt="" fetchpriority="high" />
+        </div>
+        <div class="hero-shade" aria-hidden="true"></div>
+        <div class="hero-grid" aria-hidden="true"></div>
+
+        <div class="hero-shell">
+          <div class="hero-copy reveal is-visible">
+            <p class="kicker"><span>DIVINE SIGNAL / 001</span><i></i> ELYSIUM NETWORK</p>
+            <h1 id="hero-title">
+              <span>THE FROG</span>
+              <span>HAS ENTERED</span>
+              <em>ELYSIUM.</em>
+            </h1>
+            <p class="hero-lead">One small leap for a frog.<br />One divine mess for the gods.</p>
+            <div class="hero-actions">
+              <a class="button button-gold buy-link" data-buy-link href="#token">
+                Enter the market <span aria-hidden="true">↗</span>
+              </a>
+              <a class="button button-glass" href="#lore">Discover the lore <span aria-hidden="true">↓</span></a>
+            </div>
           </div>
+
+          <aside class="hero-signal reveal is-visible" aria-label="Elysium Pepe signal information">
+            <p class="signal-label">TRANSMISSION RECEIVED</p>
+            <div class="signal-wave" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <dl>
+              <div><dt>ORIGIN</dt><dd>Elysium</dd></div>
+              <div><dt>SPECIES</dt><dd>Divine frog</dd></div>
+              <div><dt>STATUS</dt><dd class="online"><span></span> Unbothered</dd></div>
+            </dl>
+          </aside>
         </div>
 
-        <div class="hero-art" aria-label="Elysium Pepe wearing a golden laurel and toga">
-          <div class="sun-disc" aria-hidden="true"></div>
-          <img src="assets/elysium-pepe-avatar.webp" alt="Elysium Pepe wearing a golden laurel and white toga" />
-          <span class="speech-bubble">ribbitus.</span>
+        <div class="hero-contract">
+          <span class="contract-caption">CONTRACT // VERIFIED SIGNAL</span>
+          <button class="contract-full copy-contract" type="button" data-contract data-full-address>
+            0x21F9e36407B098A99A6727837077bBd0FF1A06CD
+          </button>
+          <span class="copy-hint">CLICK TO COPY</span>
         </div>
+
+        <a class="scroll-cue" href="#lore" aria-label="Scroll to the lore section">
+          <span>SCROLL TO DESCEND</span><i aria-hidden="true"></i>
+        </a>
       </section>
 
-      <div class="ticker-strip" aria-label="Elysium Pepe phrases">
-        <div class="ticker-track">
+      <div class="transmission" aria-label="Elysium Pepe phrases">
+        <div class="transmission-track">
           <span>THE GATES OPENED</span><i>✦</i><span>THE FROG WALKED IN</span><i>✦</i><span>THE GODS SAID NOTHING</span><i>✦</i>
           <span aria-hidden="true">THE GATES OPENED</span><i aria-hidden="true">✦</i><span aria-hidden="true">THE FROG WALKED IN</span><i aria-hidden="true">✦</i><span aria-hidden="true">THE GODS SAID NOTHING</span><i aria-hidden="true">✦</i>
         </div>
       </div>
 
-      <section class="story section-shell" id="story">
-        <div class="section-number">01 / THE LORE</div>
-        <div class="story-grid">
-          <h2>Who let the frog<br />into Elysium?</h2>
-          <div class="story-copy">
+      <section class="lore section-shell" id="lore" aria-labelledby="lore-title">
+        <div class="section-intro reveal">
+          <div>
+            <p class="section-index">01 / ORIGIN STORY</p>
+            <h2 id="lore-title">No invitation.<br /><em>No hesitation.</em></h2>
+          </div>
+          <div class="intro-copy">
             <p class="lead">At the gates of Elysium, the gods expected another hero. A frog showed up instead.</p>
             <p>Crowned in laurel, wrapped in a toga and completely unbothered, Pepe walked in like the place had been waiting for him.</p>
-            <p class="punchline">It probably had.</p>
+            <strong>It probably had.</strong>
           </div>
         </div>
 
-        <div class="story-cards">
-          <article>
-            <span>Ⅰ</span>
-            <h3>The gate opens</h3>
-            <p>A new chain appears beyond the clouds.</p>
+        <div class="lore-log" aria-label="The three acts of the Elysium Pepe story">
+          <article class="log-entry reveal">
+            <div class="log-index"><span>ACT</span><strong>01</strong></div>
+            <div class="log-title">
+              <p>THE OPENING</p>
+              <h3>The chain appears.</h3>
+            </div>
+            <p class="log-copy">A new world rises beyond the clouds. The gates begin to open.</p>
+            <span class="log-status">GATE OPEN</span>
           </article>
-          <article>
-            <span>Ⅱ</span>
-            <h3>The frog arrives</h3>
-            <p>No invitation. No hesitation. Just vibes.</p>
+          <article class="log-entry reveal">
+            <div class="log-index"><span>ACT</span><strong>02</strong></div>
+            <div class="log-title">
+              <p>THE ARRIVAL</p>
+              <h3>The frog walks in.</h3>
+            </div>
+            <p class="log-copy">No prophecy. No permission. Just a laurel crown and immaculate timing.</p>
+            <span class="log-status">FROG PRESENT</span>
           </article>
-          <article>
-            <span>Ⅲ</span>
-            <h3>Elysium gets weird</h3>
-            <p>The gods finally have a meme worth watching.</p>
+          <article class="log-entry reveal">
+            <div class="log-index"><span>ACT</span><strong>03</strong></div>
+            <div class="log-title">
+              <p>THE AFTERMATH</p>
+              <h3>Elysium gets weird.</h3>
+            </div>
+            <p class="log-copy">The gods finally have a meme worth watching. The timeline has a new myth.</p>
+            <span class="log-status">MYTH ACTIVE</span>
           </article>
         </div>
       </section>
 
-      <section class="gallery" id="gallery">
-        <div class="section-shell gallery-heading">
-          <div>
-            <div class="section-number">02 / THE VISIONS</div>
-            <h2>Scenes from<br />the afterlife.</h2>
-          </div>
-          <p>Proof that the frog made it past the gates.</p>
+      <section class="portal reveal" aria-label="Elysium Pepe at the celestial amphitheater">
+        <div class="portal-media">
+          <img src="assets/elysium-pepe-second-post.webp" alt="Elysium Pepe standing in a celestial amphitheater" loading="lazy" />
+        </div>
+        <div class="portal-overlay" aria-hidden="true"></div>
+        <div class="portal-copy">
+          <p>LIVE FROM THE AFTERLIFE</p>
+          <h2>The gods<br />have noticed.</h2>
+          <span>TRANSMISSION 02 — ELYSIUM AMPHITHEATER</span>
+        </div>
+        <span class="portal-stamp" aria-hidden="true">RIBBITUS<br />MAXIMUS</span>
+      </section>
+
+      <section class="visions section-shell" id="visions" aria-labelledby="visions-title">
+        <div class="visions-heading reveal">
+          <p class="section-index">02 / THE VISIONS</p>
+          <h2 id="visions-title">Proof from<br /><em>beyond the gates.</em></h2>
+          <p>Scenes recovered from the first days of the divine frog in Elysium.</p>
         </div>
 
-        <div class="gallery-grid section-shell">
-          <figure class="gallery-wide">
-            <img src="assets/elysium-pepe-first-post.webp" alt="Elysium Pepe standing at the gates of a celestial city" loading="lazy" />
-            <figcaption>The gods were expecting a hero.</figcaption>
+        <div class="vision-grid">
+          <figure class="vision-card vision-card-wide reveal">
+            <div class="vision-image">
+              <img src="assets/elysium-pepe-banner.webp" alt="A community of Elysium Pepe frogs in a celestial amphitheater" loading="lazy" />
+            </div>
+            <figcaption><span>VISION / 003</span><strong>The crowd was already waiting.</strong></figcaption>
           </figure>
-          <figure>
-            <img src="assets/elysium-pepe-second-post.webp" alt="Elysium Pepe in a celestial amphitheater" loading="lazy" />
-            <figcaption>Then the frog arrived.</figcaption>
+          <figure class="vision-card reveal">
+            <div class="vision-image">
+              <img src="assets/elysium-pepe-avatar.webp" alt="Portrait of Elysium Pepe wearing a golden laurel and white toga" loading="lazy" />
+            </div>
+            <figcaption><span>PORTRAIT / 001</span><strong>Divine. Green. Unbothered.</strong></figcaption>
           </figure>
-          <figure>
-            <img src="assets/elysium-pepe-banner.webp" alt="A community of Elysium Pepe frogs in a celestial Greek amphitheater" loading="lazy" />
-            <figcaption>The gods have noticed.</figcaption>
-          </figure>
+          <div class="vision-quote reveal">
+            <p>“The gods expected a hero.”</p>
+            <strong>THE FROG ARRIVED INSTEAD.</strong>
+            <span aria-hidden="true">✦</span>
+          </div>
         </div>
       </section>
 
-      <section class="token section-shell" id="token">
-        <div class="token-card">
-          <div class="token-seal">
-            <img src="assets/elysium-pepe-avatar.webp" alt="" />
+      <section class="token" id="token" aria-labelledby="token-title">
+        <div class="token-background" aria-hidden="true">
+          <img src="assets/elysium-pepe-banner.webp" alt="" loading="lazy" />
+        </div>
+        <div class="token-shade" aria-hidden="true"></div>
+
+        <div class="token-shell section-shell">
+          <div class="token-copy reveal">
+            <p class="section-index">03 / THE DIVINE FROG</p>
+            <h2 id="token-title"><span data-ticker>$EPEPE</span><br /><em>is the signal.</em></h2>
+            <p>Born for the new chain. Raised by the timeline.</p>
           </div>
-          <div class="token-title">
-            <p class="eyebrow">THE DIVINE FROG</p>
-            <h2 data-ticker>$EPEPE</h2>
+
+          <div class="token-panel reveal">
+            <div class="token-panel-head">
+              <img src="assets/elysium-pepe-avatar.webp" alt="" />
+              <div><span>ELYSIUM ASSET</span><strong data-ticker>$EPEPE</strong></div>
+              <i class="live-dot" aria-label="Live"></i>
+            </div>
+            <dl>
+              <div><dt>NAME</dt><dd>Elysium Pepe</dd></div>
+              <div><dt>CHAIN</dt><dd data-chain>Elysium</dd></div>
+              <div><dt>LAUNCHPAD</dt><dd><a data-launchpad-link href="https://boxa.pro/" target="_blank" rel="noreferrer">Boxa ↗</a></dd></div>
+              <div class="panel-contract">
+                <dt>CONTRACT</dt>
+                <dd><button class="copy-contract" type="button" data-contract>0x21F9e…A06CD</button></dd>
+              </div>
+            </dl>
+            <a class="button button-gold panel-buy buy-link" data-buy-link href="#token">Buy <span data-ticker>$EPEPE</span> on Boxa <span aria-hidden="true">↗</span></a>
+            <p class="token-note">Always verify the contract address before trading.</p>
           </div>
-          <dl>
-            <div>
-              <dt>Name</dt>
-              <dd>Elysium Pepe</dd>
-            </div>
-            <div>
-              <dt>Chain</dt>
-              <dd data-chain>Elysium</dd>
-            </div>
-            <div>
-              <dt>Launchpad</dt>
-              <dd><a class="launchpad-link" data-launchpad-link href="https://boxa.pro/" target="_blank" rel="noreferrer">Boxa ↗</a></dd>
-            </div>
-            <div class="contract-row">
-              <dt>Contract</dt>
-              <dd><button class="copy-contract" type="button" data-contract>Revealed at launch</button></dd>
-            </div>
-          </dl>
-          <a class="button button-primary token-buy buy-link" data-buy-link href="#token">Buy <span data-ticker>$EPEPE</span></a>
         </div>
       </section>
     </main>
 
-    <footer class="site-footer section-shell">
-      <a class="brand" href="#top">
-        <img src="assets/elysium-pepe-avatar.webp" alt="" />
-        <span>ELYSIUM PEPE</span>
-      </a>
-      <p>Born for the new chain. Raised by the timeline.</p>
-      <div class="footer-links" aria-label="Official social links">
-        <a data-x-link href="https://x.com/ElysiumPepeCoin" target="_blank" rel="noreferrer">X ↗</a>
-        <a data-telegram-link href="https://t.me/ElysiumPepeOfficial" target="_blank" rel="noreferrer">Telegram ↗</a>
+    <footer class="site-footer">
+      <div class="footer-shell section-shell">
+        <a class="brand footer-brand" href="#top">
+          <span class="brand-mark"><img src="assets/elysium-pepe-avatar.webp" alt="" /></span>
+          <span class="brand-name">ELYSIUM <b>PEPE</b></span>
+        </a>
+        <p>ONE FROG. ONE DESTINY. ELYSIUM.</p>
+        <div class="socials" aria-label="Official social links">
+          <a data-x-link href="https://x.com/ElysiumPepeCoin" target="_blank" rel="noreferrer">X <span>↗</span></a>
+          <a data-telegram-link href="https://t.me/ElysiumPepeOfficial" target="_blank" rel="noreferrer">TELEGRAM <span>↗</span></a>
+        </div>
       </div>
     </footer>
+
+    <div class="copy-toast" role="status" aria-live="polite" data-copy-toast>Contract copied to clipboard</div>
   </body>
 </html>
